@@ -1,0 +1,70 @@
+# Node.js / NestJS
+
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Compilados
+dist/
+build/
+out/
+tmp/
+.cache/
+coverage/
+
+# Archivos de entorno
+.env
+.env.*
+!.env.example
+
+# Logs y temporales
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.tsbuildinfo
+
+# IDE / Sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker / containers
+docker-compose.override.yml
+.dockerignore
+
+# Tests
+jest.config.js.map
+coverage/
+test-results/
+
+# Lock files opcionales (si usás un solo gestor de paquetes podés dejarlo)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# CI/CD
+.npmrc
+.vercel/
+.render/
+.fly/
+.netlify/
+
+# Documentación generada
+docs/build/
+docs/.vuepress/dist/
+
+# TypeScript
+*.js
+*.d.ts
+*.map
+
+# Local dev
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
