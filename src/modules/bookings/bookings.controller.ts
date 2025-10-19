@@ -1,7 +1,9 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import { Controller, Get, Query, UseGuards } from "@nestjs/common";
 import { BookingsService } from "./bookings.service";
+import { SupabaseAuthGuard } from "../auth/supabase-auth.guard";
 
 @Controller("bookings")
+@UseGuards(SupabaseAuthGuard)
 export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
@@ -10,5 +12,3 @@ export class BookingsController {
     return this.bookingsService.list(userId);
   }
 }
-
-

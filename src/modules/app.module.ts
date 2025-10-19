@@ -7,6 +7,7 @@ import { BookingsModule } from "./bookings/bookings.module";
 import { MessagesModule } from "./messages/messages.module";
 import { HostsModule } from "./hosts/hosts.module";
 import { AdminModule } from "./admin/admin.module";
+import { SupabaseModule } from "../supabase/supabase.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AdminModule } from "./admin/admin.module";
     MessagesModule,
     HostsModule,
     AdminModule,
+    SupabaseModule,
   ],
 })
 export class AppModule implements NestModule {
