@@ -1,6 +1,6 @@
-# Rental API (NestJS Mock)
+# Rental API (NestJS)
 
-API mock para la plataforma de alquileres. Proporciona endpoints simulados para que el frontend funcione sin una base de datos real.
+API para la plataforma de alquileres. Integra Supabase Auth (JWT) y aplica rate‑limit global.
 
 ## Requisitos
 
@@ -27,6 +27,8 @@ El servidor corre en `http://localhost:3001` con prefijo `api`. CORS habilitado 
 
 ```bash
 PORT=3001 # opcional, por defecto 3001
+SUPABASE_URL=https://<PROJECT_REF>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
 ## Endpoints
@@ -42,14 +44,15 @@ Base: `http://localhost:3001/api`
 
 ### Auth
 
-- POST /auth/register: registra usuario (mock)
-- POST /auth/forgot-password: envía email (mock)
+- Autenticación y recuperación están delegadas a Supabase Auth (frontend).
+- El backend valida JWT con `SupabaseAuthGuard` y roles con `RoleGuard`.
 
 ### Users
 
 - PATCH /users/profile: actualiza perfil (mock)
 
-## Notas
+## Seguridad / Producción
 
-- Los datos son en memoria. Cada reinicio restablece el estado.
-- Prefijo global `/api` ya configurado en `main.ts`.
+- Throttling global: `@nestjs/throttler` (20 req / 60s por IP). Ajustable en `AppModule`.
+- CORS: habilitar el dominio de producción en `main.ts`.
+- Supabase: usar `SUPABASE_SERVICE_ROLE_KEY` solo en backend (nunca exponer en frontend).
