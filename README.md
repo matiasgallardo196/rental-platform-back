@@ -47,6 +47,11 @@ Base: `http://localhost:3001/api`
 - Autenticación y recuperación están delegadas a Supabase Auth (frontend).
 - El backend valida JWT con `SupabaseAuthGuard` y roles con `RoleGuard`.
 
+#### Endpoints de auth deshabilitados
+
+- `POST /auth/register`, `POST /auth/login`, `POST /auth/forgot-password` responden **410 Gone** indicando que se use Supabase desde el frontend.
+- Ver `src/modules/auth/auth.controller.ts`.
+
 ### Users
 
 - PATCH /users/profile: actualiza perfil (mock)
