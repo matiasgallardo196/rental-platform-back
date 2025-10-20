@@ -3,20 +3,9 @@ import {
   properties as mockProperties,
   users,
   bookings as mockBookings,
-} from "../../mock/data";
+} from "../../mocks/data";
 
-interface ListParams {
-  query?: string;
-  location?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  guests?: number;
-  bedrooms?: number;
-  checkIn?: string; // yyyy-mm-dd
-  checkOut?: string; // yyyy-mm-dd
-  page: number;
-  limit: number;
-}
+import { ListPropertiesDto } from "./dto/list-properties.dto";
 
 @Injectable()
 export class PropertiesService {
@@ -50,7 +39,7 @@ export class PropertiesService {
     });
   }
 
-  list(params: ListParams) {
+  list(params: ListPropertiesDto) {
     let filtered = [...this.properties];
 
     if (params.query) {

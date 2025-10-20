@@ -1,5 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import {
+  R2_ACCESS_KEY_ID,
+  R2_BUCKET,
+  R2_ENDPOINT,
+  R2_PUBLIC_BASE_URL,
+  R2_SECRET_ACCESS_KEY,
+} from "../../config/env.loader";
+import {
   S3Client,
   DeleteObjectCommand,
   PutObjectCommand,
@@ -13,11 +20,11 @@ export class R2Service {
   private publicBase: string;
 
   constructor() {
-    const endpoint = process.env.R2_ENDPOINT!;
-    const accessKeyId = process.env.R2_ACCESS_KEY_ID!;
-    const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY!;
-    this.bucket = process.env.R2_BUCKET!;
-    this.publicBase = process.env.R2_PUBLIC_BASE_URL!;
+    const endpoint = R2_ENDPOINT!;
+    const accessKeyId = R2_ACCESS_KEY_ID!;
+    const secretAccessKey = R2_SECRET_ACCESS_KEY!;
+    this.bucket = R2_BUCKET!;
+    this.publicBase = R2_PUBLIC_BASE_URL!;
     if (!endpoint || !accessKeyId || !secretAccessKey || !this.bucket) {
       throw new Error("R2 env vars not configured");
     }

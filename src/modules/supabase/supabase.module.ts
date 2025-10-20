@@ -1,5 +1,9 @@
 import { Global, Module } from "@nestjs/common";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import {
+  SUPABASE_SERVICE_ROLE_KEY,
+  SUPABASE_URL,
+} from "../../config/env.loader";
 
 export const SUPABASE_ADMIN = "SUPABASE_ADMIN";
 
@@ -9,10 +13,10 @@ export const SUPABASE_ADMIN = "SUPABASE_ADMIN";
     {
       provide: SUPABASE_ADMIN,
       useFactory: (): SupabaseClient => {
-        return createClient(
-          process.env.SUPABASE_URL!,
-          process.env.SUPABASE_SERVICE_ROLE_KEY!
-        );
+        if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+          throw new Error("Supabase env vars not configured");
+        }
+        return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
       },
     },
   ],

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { bookings as allBookings, users, properties } from "../../mock/data";
+import { bookings as allBookings, users, properties } from "../../mocks/data";
 
 const DEFAULT_BOOKINGS = {
   upcoming: [

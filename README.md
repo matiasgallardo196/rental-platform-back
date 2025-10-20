@@ -31,6 +31,24 @@ SUPABASE_URL=https://<PROJECT_REF>.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
+### Ejemplo `.env.development`
+
+```bash
+# Server
+PORT=3001
+
+# Supabase (Service Role key solo en backend)
+SUPABASE_URL=https://<PROJECT_REF>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
+# Cloudflare R2 / S3 compatible
+R2_ENDPOINT=https://<ACCOUNT_ID>.r2.cloudflarestorage.com
+R2_ACCESS_KEY_ID=your-access-key-id
+R2_SECRET_ACCESS_KEY=your-secret-access-key
+R2_BUCKET=your-bucket-name
+R2_PUBLIC_BASE_URL=https://cdn.example.com
+```
+
 ## Endpoints
 
 Base: `http://localhost:3001/api`
@@ -55,6 +73,15 @@ Base: `http://localhost:3001/api`
 ### Users
 
 - PATCH /users/profile: actualiza perfil (mock)
+
+## Swagger / OpenAPI
+
+- UI de documentación: `http://localhost:3001/api/docs`
+- Autorización: botón "Authorize" → esquema `bearer` → pegar `Bearer <JWT>` de Supabase.
+- Roles:
+  - Rutas `/admin/**` requieren `role=admin` en `user_metadata`.
+  - Rutas `/hosts/**` requieren `role=host` o `admin`.
+- Rate limit: 20 req / 60s por IP (429 Too Many Requests). Ajustable en `AppModule`.
 
 ## Seguridad / Producción
 

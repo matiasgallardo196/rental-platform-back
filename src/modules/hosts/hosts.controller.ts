@@ -9,39 +9,136 @@ import {
 } from "@nestjs/common";
 import { HostsService } from "./hosts.service";
 import { SupabaseAuthGuard } from "../auth/supabase-auth.guard";
-import { RoleGuard } from "../auth/role.guard";
+import { Roles } from "../auth/roles.decorator";
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiForbiddenResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiTooManyRequestsResponse,
+  ApiUnauthorizedResponse,
+} from "@nestjs/swagger";
+import { ErrorResponseDto } from "../../common/dto/error-response.dto";
 
+@ApiTags("hosts")
+@ApiBearerAuth()
 @Controller("hosts")
 @UseGuards(SupabaseAuthGuard)
 export class HostsController {
   constructor(private readonly hostsService: HostsService) {}
 
   @Get(":hostId/properties")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Propiedades del host" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   getProperties(@Param("hostId") hostId: string) {
     return this.hostsService.getProperties(hostId);
   }
 
   @Get(":hostId/bookings")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Reservas del host" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   getBookings(@Param("hostId") hostId: string) {
     return this.hostsService.getBookings(hostId);
   }
 
   @Get(":hostId/balances")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Balances del host" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   getBalances(@Param("hostId") hostId: string) {
     return this.hostsService.getBalances(hostId);
   }
 
   @Get(":hostId/messages")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Mensajes del host" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   getMessages(@Param("hostId") hostId: string) {
     return this.hostsService.getMessages(hostId);
   }
 
   @Get(":hostId/messages/:bookingId")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Hilo de mensajes" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   getMessageThread(
     @Param("hostId") hostId: string,
     @Param("bookingId") bookingId: string
@@ -50,7 +147,24 @@ export class HostsController {
   }
 
   @Post(":hostId/messages/:bookingId")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Mensaje enviado" })
+  @ApiBadRequestResponse({
+    description: "Payload inválido",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   sendMessage(
     @Param("hostId") hostId: string,
     @Param("bookingId") bookingId: string,
@@ -60,7 +174,24 @@ export class HostsController {
   }
 
   @Patch(":hostId/messages/:bookingId/read")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Hilo marcado como leído" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   markRead(
     @Param("hostId") hostId: string,
     @Param("bookingId") bookingId: string
@@ -69,7 +200,24 @@ export class HostsController {
   }
 
   @Patch(":hostId/messages/read")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Hilos marcados como leídos" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   markReadBulk(
     @Param("hostId") hostId: string,
     @Body() body: { bookingIds: string[] }
@@ -78,7 +226,24 @@ export class HostsController {
   }
 
   @Patch(":hostId/messages/:bookingId/unread")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Hilo marcado como no leído" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   markUnread(
     @Param("hostId") hostId: string,
     @Param("bookingId") bookingId: string
@@ -87,7 +252,24 @@ export class HostsController {
   }
 
   @Patch(":hostId/messages/unread")
-  @UseGuards(new RoleGuard(["host", "admin"]))
+  @ApiOkResponse({ description: "Hilos marcados como no leídos" })
+  @ApiBadRequestResponse({
+    description: "Parámetros inválidos",
+    type: ErrorResponseDto,
+  })
+  @ApiUnauthorizedResponse({
+    description: "Token inválido o ausente",
+    type: ErrorResponseDto,
+  })
+  @ApiForbiddenResponse({
+    description: "Rol insuficiente",
+    type: ErrorResponseDto,
+  })
+  @ApiTooManyRequestsResponse({
+    description: "Too many requests",
+    type: ErrorResponseDto,
+  })
+  @Roles("host", "admin")
   markUnreadBulk(
     @Param("hostId") hostId: string,
     @Body() body: { bookingIds: string[] }

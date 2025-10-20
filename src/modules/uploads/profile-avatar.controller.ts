@@ -3,7 +3,7 @@ import type { Request } from "express";
 import { SupabaseAuthGuard } from "../auth/supabase-auth.guard";
 import { Inject } from "@nestjs/common";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { SUPABASE_ADMIN } from "../../supabase/supabase.module";
+import { SUPABASE_ADMIN } from "../supabase/supabase.module";
 import { R2Service } from "./r2.service";
 
 @Controller("profile/avatar")

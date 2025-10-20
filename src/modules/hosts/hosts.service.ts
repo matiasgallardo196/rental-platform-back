@@ -5,7 +5,7 @@ import {
   balances,
   users,
   messages,
-} from "../../mock/data";
+} from "../../mocks/data";
 
 const hostReadByBooking: Record<string, Set<string>> = {};
 

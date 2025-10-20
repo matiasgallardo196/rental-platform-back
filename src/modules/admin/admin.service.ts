@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { users, bookings, properties, messages } from "../../mock/data";
+import { users, bookings, properties, messages } from "../../mocks/data";
 
 @Injectable()
 export class AdminService {
