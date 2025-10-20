@@ -9,6 +9,7 @@ import { BookingsModule } from "./bookings/bookings.module";
 import { MessagesModule } from "./messages/messages.module";
 import { HostsModule } from "./hosts/hosts.module";
 import { AdminModule } from "./admin/admin.module";
+import { UploadsModule } from "./uploads/uploads.module";
 import { SupabaseModule } from "../supabase/supabase.module";
 
 @Module({
@@ -22,6 +23,7 @@ import { SupabaseModule } from "../supabase/supabase.module";
     HostsModule,
     AdminModule,
     SupabaseModule,
+    UploadsModule,
   ],
   providers: [
     {
