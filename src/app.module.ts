@@ -13,6 +13,7 @@ import { HostsModule } from "./modules/hosts/hosts.module";
 import { AdminModule } from "./modules/admin/admin.module";
 import { UploadsModule } from "./modules/uploads/uploads.module";
 import { SupabaseModule } from "./modules/supabase/supabase.module";
+import { HealthModule } from "./modules/health/health.module";
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { SupabaseModule } from "./modules/supabase/supabase.module";
     AdminModule,
     SupabaseModule,
     UploadsModule,
+    HealthModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
