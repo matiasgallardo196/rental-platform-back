@@ -1,6 +1,6 @@
-# Rental API (NestJS)
+# AlojaPy API (NestJS)
 
-API para la plataforma de alquileres. Integra Supabase Auth (JWT) y aplica rate‑limit global.
+API para la plataforma de alquileres AlojaPy. Integra Supabase Auth (JWT) y aplica rate‑limit global.
 
 ## Requisitos
 
